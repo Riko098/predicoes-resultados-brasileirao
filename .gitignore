@@ -132,3 +132,10 @@ dmypy.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Projeto específico
+/analises/resultados*.csv
+/analises/*.json
+statsbomb_data/
+dados_enriquecidos.csv
+cache/
