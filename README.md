@@ -10,20 +10,55 @@ Um software completo de **Machine Learning** para prever resultados de partidas 
 - 📋 **Faltas** (total da partida)
 - 🟨 **Cartões** (análise de padrões)
 
-## 📁 Arquivos do Projeto
+## 📁 Estrutura do Projeto
 
 ```
-e:/Futebol/archive/
-├── campeonato-brasileiro-full.csv           # Dados principais das partidas
-├── campeonato-brasileiro-estatisticas-full.csv  # Estatísticas de jogo
-├── campeonato-brasileiro-gols.csv           # Dados de gols
-├── campeonato-brasileiro-cartoes.csv        # Dados de cartões
-├── Legenda.txt                              # Dicionário de dados
-├── predicao_futebol.ipynb                   # Notebook Jupyter completo
-├── preditor_futebol.py                      # Script Python standalone
-├── README.md                                # Este arquivo
-└── modelos_futebol.pkl                      # Modelos treinados (gerado)
+📦 predicoes-resultados-brasileirao/
+│
+├── 📊 dados/                          # Arquivos de dados
+│   ├── campeonato-brasileiro-full.csv
+│   ├── campeonato-brasileiro-estatisticas-full.csv
+│   ├── campeonato-brasileiro-gols.csv
+│   ├── campeonato-brasileiro-cartoes.csv
+│   └── Legenda.txt
+│
+├── 📚 documentacao/                   # Guias e referências
+│   ├── LEIA_PRIMEIRO.txt
+│   ├── COMECE_AQUI.txt
+│   ├── GUIA_INTERPRETACAO.md
+│   ├── GUIA_STATSBOMB_INTEGRATION.md
+│   ├── TROUBLESHOOTING.md
+│   └── [outras documentações]
+│
+├── 🤖 scripts/                        # Código executável
+│   ├── preditor_futebol.py
+│   ├── preditor_por_time.py
+│   ├── teste_rapido.py
+│   └── [outros scripts]
+│
+├── 🔗 integracao/                     # APIs e integrações
+│   ├── integracao_statsbomb.py
+│   ├── clonar_statsbomb.py
+│   ├── teste_statsbomb.py
+│   └── GUIA_STATSBOMB_INTEGRATION.md
+│
+├── 📓 exemplos/                       # Notebooks e demos
+│   └── predicao_futebol.ipynb
+│
+├── 🎯 modelos/                        # Modelos treinados
+│   ├── modelos_futebol.pkl
+│   └── modelos_teste.pkl
+│
+├── 📈 analises/                       # Resultados de análises
+│   └── (para seus resultados customizados)
+│
+├── 📖 README.md                       # Este arquivo
+├── ⚙️ requirements.txt                # Dependências Python
+├── 📋 ESTRUTURA_PROJETO.md            # Guia de organização
+└── .gitignore                         # Arquivos ignorados
 ```
+
+**Para mais detalhes sobre a estrutura**, veja [ESTRUTURA_PROJETO.md](ESTRUTURA_PROJETO.md)
 
 ## 🚀 Como Usar
 
@@ -31,16 +66,16 @@ e:/Futebol/archive/
 
 1. **Instale as dependências:**
 ```bash
-pip install pandas numpy scikit-learn xgboost matplotlib seaborn jupyter
+pip install -r requirements.txt
 ```
 
 2. **Execute o Notebook:**
 ```bash
-jupyter notebook predicao_futebol.ipynb
+jupyter notebook exemplos/predicao_futebol.ipynb
 ```
 
 3. **Execute as células em sequência** para:
-   - Explorar os dados
+   - Explorar os dados em `dados/`
    - Treinar os modelos
    - Ver visualizações
    - Fazer predições
@@ -49,19 +84,19 @@ jupyter notebook predicao_futebol.ipynb
 
 1. **Instale as dependências:**
 ```bash
-pip install pandas numpy scikit-learn xgboost
+pip install -r requirements.txt
 ```
 
 2. **Execute o script:**
 ```bash
-python preditor_futebol.py
+python scripts/preditor_futebol.py
 ```
 
 3. **O script irá:**
-   - Carregar os dados
+   - Carregar os dados de `dados/`
    - Treinar os modelos
    - Fazer predições de exemplo
-   - Salvar os modelos em `modelos_futebol.pkl`
+   - Salvar os modelos em `modelos/modelos_futebol.pkl`
 
 ## 📈 Features Utilizadas
 
@@ -106,11 +141,11 @@ O sistema usa 14 features principais para fazer as predições:
 ### Python Script:
 
 ```python
-from preditor_futebol import PreditorFutebol
+from scripts.preditor_futebol import PreditorFutebol
 
 # Inicializar
 preditor = PreditorFutebol()
-preditor.carregar_modelos('modelos_futebol.pkl')
+preditor.carregar_modelos('modelos/modelos_futebol.pkl')
 
 # Definir um novo cenário de jogo
 novo_jogo = {
@@ -238,7 +273,7 @@ Este projeto agora inclui integração com [StatsBomb Open Data](https://github.
 #### Método 1: Clone Local (Recomendado)
 
 ```bash
-python clonar_statsbomb.py
+python integracao/clonar_statsbomb.py
 ```
 
 Isso irá:
@@ -250,7 +285,7 @@ Isso irá:
 #### Método 2: Teste Rápido
 
 ```bash
-python teste_statsbomb.py
+python integracao/teste_statsbomb.py
 ```
 
 Faz requisições HTTP para explorar dados sem clonar.
@@ -258,7 +293,7 @@ Faz requisições HTTP para explorar dados sem clonar.
 #### Método 3: Uso Programático
 
 ```python
-from integracao_statsbomb import StatsBombIntegration
+from integracao.integracao_statsbomb import StatsBombIntegration
 
 # Inicializar
 sb = StatsBombIntegration()
@@ -276,7 +311,7 @@ partidas = sb.carregar_partidas_por_competicao(
 df_enriquecido = sb.criar_dataset_enriquecido(partidas)
 
 # Salvar
-df_enriquecido.to_csv('dados_estatsbomb.csv', index=False)
+df_enriquecido.to_csv('analises/dados_estatsbomb.csv', index=False)
 ```
 
 ### 📊 Métricas Extraíveis
