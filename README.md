@@ -219,16 +219,141 @@ Se o arquivo `requirements.txt` não existir, execute:
 pip install pandas numpy scikit-learn xgboost matplotlib seaborn jupyter
 ```
 
+## � Integração com StatsBomb Open Data
+
+Este projeto agora inclui integração com [StatsBomb Open Data](https://github.com/statsbomb/open-data) para enriquecer análises com dados estatísticos detalhados!
+
+### ✨ Dados Disponíveis
+
+- 🇧🇷 **Serie A (Brasil)** 2015/2016 e 1986/1987
+- 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Premier League** (Inglaterra)
+- 🇪🇸 **La Liga** (Espanha)
+- 🇮🇹 **Serie A** (Itália)
+- 🇬🇧 **Championship** (Inglaterra)
+- 🇫🇷 **Ligue 1** (França)
+- ⚽ **Champions League** e **Copa do Mundo**
+
+### 🚀 Como Usar
+
+#### Método 1: Clone Local (Recomendado)
+
+```bash
+python clonar_statsbomb.py
+```
+
+Isso irá:
+1. Clonar o repositório StatsBomb (~500MB)
+2. Explorar competições disponíveis
+3. Carregar partidas e eventos
+4. Gerar visualizações
+
+#### Método 2: Teste Rápido
+
+```bash
+python teste_statsbomb.py
+```
+
+Faz requisições HTTP para explorar dados sem clonar.
+
+#### Método 3: Uso Programático
+
+```python
+from integracao_statsbomb import StatsBombIntegration
+
+# Inicializar
+sb = StatsBombIntegration()
+
+# Carregar competições
+competicoes = sb.carregar_competicoes()
+
+# Carregar partidas (Brasil)
+partidas = sb.carregar_partidas_por_competicao(
+    competition_id=12,  # Serie A
+    season_id=1         # 2015/2016
+)
+
+# Criar dataset enriquecido
+df_enriquecido = sb.criar_dataset_enriquecido(partidas)
+
+# Salvar
+df_enriquecido.to_csv('dados_estatsbomb.csv', index=False)
+```
+
+### 📊 Métricas Extraíveis
+
+| Métrica | Descrição | Exemplo |
+|---------|-----------|---------|
+| **Passes** | Total de passes por time | Home: 523, Away: 487 |
+| **Passes Completos (%)** | Acurácia de passes | 84.5% |
+| **Shots** | Chutes a gol | Home: 12, Away: 8 |
+| **Expected Goals (xG)** | Qualidade das oportunidades | 2.34 |
+| **Tackles** | Desafios defensivos | Home: 18, Away: 15 |
+| **Fouls** | Faltas cometidas | Home: 14, Away: 12 |
+| **Corners** | Escanteios | Home: 6, Away: 4 |
+| **Dribbles** | Dribles bem-sucedidos | Home: 8, Away: 5 |
+
+### 🔗 Arquivos de Integração
+
+```
+├── integracao_statsbomb.py          # Classe StatsBombIntegration
+├── clonar_statsbomb.py              # Script para clonar repo
+├── teste_statsbomb.py               # Teste rápido via HTTP
+├── GUIA_STATSBOMB_INTEGRATION.md    # Documentação completa
+└── statsbomb_data/                  # Dados (após clone)
+    └── data/
+        ├── competitions.json
+        ├── matches/
+        ├── events/
+        ├── lineups/
+        └── three-sixty/
+```
+
+### 💡 Casos de Uso
+
+#### 1. Head-to-Head Automático
+```python
+# Encontrar todos os confrontos históricos
+confrontos = sb.get_head_to_head('Flamengo', 'Vasco')
+```
+
+#### 2. Análise de Forma Recent
+```python
+# Últimos 5 jogos de um time
+form = sb.get_recent_form('Flamengo', matches=5)
+```
+
+#### 3. Comparação de Times
+```python
+# Estatísticas agregadas de um time
+stats = sb.get_team_stats('Flamengo', season=2023)
+```
+
+### 🔐 Termos de Uso
+
+- ✅ Uso para pesquisa e análise
+- ✅ Creditar StatsBomb como fonte
+- ✅ Compartilhar resultados publicamente
+- ❌ Revender dados
+- ❌ Uso comercial sem permissão
+
+### 📚 Documentação
+
+- [StatsBomb Open Data](https://github.com/statsbomb/open-data)
+- [Especificação JSON](https://github.com/statsbomb/open-data/tree/master/doc)
+- [Guia Completo](GUIA_STATSBOMB_INTEGRATION.md)
+
+---
+
 ## 🚀 Próximas Melhorias
 
-- [ ] Adicionar histórico de vitórias/derrotas dos times
-- [ ] Integrar dados em tempo real via API
-- [ ] Implementar Web API para servir predições
-- [ ] Adicionar análise de head-to-head
-- [ ] Incorporar dados de lesões de jogadores
+- [x] Integrar dados StatsBomb Open Data
+- [ ] API-Football para dados em tempo real
+- [ ] Dashboard interativo (Streamlit)
+- [ ] Análise de head-to-head automática
+- [ ] Incorporar dados de lesões
 - [ ] Treinar com dados mais recentes
-- [ ] Criar dashboard interativo
-- [ ] Implementar validação cruzada mais robusta
+- [ ] Validação cruzada robusta
+- [ ] Web API para produção
 
 ## 📚 Referências
 
