@@ -1,0 +1,171 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║     ✨ NOVO! PREDITOR INTERATIVO DE TIMES - AGORA DISPONÍVEL ✨           ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+🎉 O QUE É NOVO?
+
+Um novo programa que permite você escolher os times FLAMENGO x BOTAFOGO (por 
+exemplo) e ver a predição personalizada para esse jogo específico!
+
+
+🚀 COMO EXECUTAR
+
+  $ python preditor_por_time.py
+
+
+📊 O QUE VOCÊ PODE FAZER
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ✓ Escolher mandante e visitante em uma lista de 46 times             │
+│ ✓ Ver predição completa com vencedor, placar, escanteios e faltas    │
+│ ✓ Ver estatísticas médias de um time específico                      │
+│ ✓ Comparar dois times lado a lado                                    │
+│ ✓ Menu fácil e intuitivo                                             │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+🏆 EXEMPLO PRÁTICO
+
+Você quer saber: Como será Flamengo x Botafogo?
+
+1. Execute: python preditor_por_time.py
+2. Escolha opção 1: "Fazer Nova Predição"
+3. Digite 21 (Flamengo) como mandante
+4. Digite 9 (Botafogo-RJ) como visitante
+5. Receba:
+   
+   ⚽ Resultado: Mandante vence (43% confiança)
+   📋 Placar: 1 x 1
+   🎲 Escanteios: 5
+   📋 Faltas: 12
+   
+   Probabilidades:
+   • Flamengo: 43%
+   • Botafogo: 22.5%
+   • Empate: 34.5%
+
+
+📋 OS 46 TIMES DISPONÍVEIS
+
+ 1. America-MG              24. Goias
+ 2. America-RN              25. Gremio
+ 3. Athletico-PR            26. Gremio Prudente
+ 4. Atletico-GO             27. Guarani
+ 5. Atletico-MG             28. Internacional
+ 6. Avai                    29. Ipatinga
+ 7. Bahia                   30. Joinville
+ 8. Barueri                 31. Juventude
+ 9. Botafogo-RJ             32. Mirassol
+10. Bragantino              33. Nautico
+11. Brasiliense             34. Palmeiras
+12. CSA                     35. Parana
+13. Ceara                   36. Paysandu
+14. Chapecoense             37. Ponte Preta
+15. Corinthians             38. Portuguesa
+16. Coritiba                39. Santa Cruz
+17. Criciuma                40. Santo Andre
+18. Cruzeiro                41. Santos
+19. Cuiaba                  42. Sao Caetano
+20. Figueirense             43. Sao Paulo
+21. Flamengo                44. Sport
+22. Fluminense              45. Vasco
+23. Fortaleza               46. Vitoria
+
+
+⚙️ OPÇÕES DO MENU
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ 1 - FAZER NOVA PREDIÇÃO                                             │
+│    └─ Escolha mandante e visitante, veja a predição completa       │
+│                                                                      │
+│ 2 - VER ESTATÍSTICAS DE UM TIME                                    │
+│    └─ Selecione um time e veja suas médias de chutes, posse, etc.  │
+│                                                                      │
+│ 3 - COMPARAR DOIS TIMES                                            │
+│    └─ Coloque 2 times lado a lado para comparar desempenho        │
+│                                                                      │
+│ 0 - SAIR                                                           │
+│    └─ Fechar o programa                                            │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+📊 INFORMAÇÕES DA PREDIÇÃO
+
+Quando você faz uma predição, você recebe:
+
+  ⚽ VENCEDOR PROVÁVEL
+     └─ Mandante, Visitante ou Empate
+
+  🎯 CONFIANÇA
+     └─ Porcentagem de certeza da predição (0-100%)
+
+  📋 PLACAR ESTIMADO
+     └─ Gols esperados para cada time
+
+  🎲 ESCANTEIOS
+     └─ Total de escanteios estimados na partida
+
+  📋 FALTAS
+     └─ Total de faltas esperadas
+
+  📊 PROBABILIDADES
+     └─ Distribuição de chances: Mandante, Visitante, Empate
+
+
+🔍 DADOS USADOS
+
+As predições são baseadas em:
+  • Histórico completo de desempenho de cada time
+  • Chutes, posse, faltas, escanteios, etc.
+  • 9.165 partidas analisadas
+  • Modelos de Machine Learning treinados
+
+✓ Dados reais
+✓ Estatísticas genuínas dos times
+✓ Modelos validados
+
+
+💡 DICAS DE USO
+
+✓ Explore todos os 46 times
+✓ Compare times antes de fazer predição
+✓ Leia as estatísticas históricas
+✓ Veja como cada time performa em casa vs fora
+✓ Compare a confiança com suas próprias análises
+
+❌ Lembre-se: Futebol é imprevisível!
+   As predições são ESTIMATIVAS, não garantias.
+
+
+📖 DOCUMENTAÇÃO COMPLETA
+
+Para mais detalhes:
+  • GUIA_PREDITOR_TIMES.py - Guia interativo completo
+  • GUIA_INTERPRETACAO.md - Como entender os resultados
+  • README.md - Documentação geral do projeto
+
+
+🎯 COMECE AGORA
+
+   $ python preditor_por_time.py
+
+E escolha um dos 46 times para começar suas predições!
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Últimas novidades do Sistema de Predição:
+
+✅ Preditor Principal (preditor_futebol.py)
+✅ Notebook Jupyter (predicao_futebol.ipynb)
+✅ Menu Interativo (inicio_rapido.py)
+✅ Exemplos Avançados (exemplos_avancados.py)
+✅ 🆕 PREDITOR POR TIME (preditor_por_time.py) ⭐ NOVO!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Boa sorte! ⚽
+

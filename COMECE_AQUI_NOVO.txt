@@ -1,0 +1,176 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                    🎉 NOVO RECURSO DISPONÍVEL! 🎉                        ║
+║                                                                            ║
+║              PREDITOR INTERATIVO DE TIMES - ESCOLHA E VEJA!              ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+✨ O QUE VOCÊ PODE FAZER AGORA:
+
+Escolher os times (ex: Flamengo x Botafogo) e receber uma predição 
+personalizada com:
+  ⚽ Vencedor provável
+  📋 Placar estimado
+  🎲 Escanteios
+  📋 Faltas
+  📊 Probabilidades completas
+
+
+🚀 COMO USAR (3 OPÇÕES)
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ OPÇÃO 1: PREDITOR INTERATIVO (NOVO!) ⭐                            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  $ python preditor_por_time.py                                    │
+│                                                                     │
+│  ✓ Menu interativo para escolher times                            │
+│  ✓ 46 times disponíveis                                           │
+│  ✓ 3 opções: Predição, Estatísticas, Comparação                 │
+│  ✓ Muito intuitivo e fácil de usar                               │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ OPÇÃO 2: VER DEMONSTRAÇÃO (5 clássicos)                            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  $ python demonstracao_predicoes.py                               │
+│                                                                     │
+│  ✓ Vê exemplos funcionando com:                                   │
+│    - Flamengo x Botafogo (Clássico Carioca)                      │
+│    - Gremio x Internacional (Gre-Nal)                            │
+│    - Palmeiras x Santos (Clássico Paulista)                      │
+│    - Vasco x Fluminense (Clássico Carioca)                       │
+│  ✓ Tira dúvidas sobre o funcionamento                            │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ OPÇÃO 3: MENU PRINCIPAL (começa por aqui)                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  $ python inicio_rapido.py                                        │
+│                                                                     │
+│  ✓ Menu com várias opções                                        │
+│  ✓ Acesso a todo o sistema                                       │
+│  ✓ Para quem quer explorar tudo                                  │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+📊 EXEMPLO PRÁTICO FUNCIONANDO
+
+Você quer saber: Flamengo x Botafogo - Quem ganha?
+
+Resultado da Predição:
+  🥇 Vencedor: Mandante (Flamengo)
+  🎯 Confiança: 43.0%
+  📋 Placar: 1 x 1
+  🎲 Escanteios: 5
+  📋 Faltas: 12
+  
+  Probabilidades:
+  • Flamengo (Mandante): 43%
+  • Botafogo (Visitante): 22.5%
+  • Empate: 34.5%
+
+Estatísticas dos Times:
+  Flamengo: 7.0 chutes, 59% posse, 2.9 escanteios
+  Botafogo: 4.3 chutes, 47% posse, 1.6 escanteios
+
+
+🏆 OS 46 TIMES (Escolha qualquer um!)
+
+Principais:
+  21. Flamengo        34. Palmeiras       44. São Paulo
+   9. Botafogo-RJ     41. Santos          15. Corinthians
+  22. Fluminense       5. Atletico-MG     18. Cruzeiro
+  45. Vasco           28. Internacional   25. Gremio
+
+E mais 36 outros times! (Execute o programa para ver a lista completa)
+
+
+🎯 FUNCIONALIDADES DO PREDITOR
+
+┌────────────────────────────────────────────────────────────────┐
+│ 1. FAZER NOVA PREDIÇÃO                                       │
+│    └─ Escolha mandante e visitante, obtenha predição          │
+│                                                                │
+│ 2. VER ESTATÍSTICAS                                           │
+│    └─ Veja desempenho médio de um time                        │
+│                                                                │
+│ 3. COMPARAR TIMES                                             │
+│    └─ Compare 2 times lado a lado                             │
+│                                                                │
+│ 0. SAIR                                                       │
+│    └─ Fechar o programa                                       │
+└────────────────────────────────────────────────────────────────┘
+
+
+📋 O QUE VOCÊ RECEBE EM CADA PREDIÇÃO
+
+  ✓ Estatísticas históricas de ambos os times
+  ✓ Vencedor mais provável
+  ✓ Nível de confiança (0-100%)
+  ✓ Placar estimado
+  ✓ Escanteios previstos
+  ✓ Faltas estimadas
+  ✓ Gráfico com probabilidades
+
+
+💡 COMO COMEÇAR (Rápido!)
+
+1. Abra o terminal no diretório e execute:
+
+   $ python preditor_por_time.py
+
+2. Escolha opção 1 (Fazer Nova Predição)
+
+3. Digite 21 para Flamengo (mandante)
+
+4. Digite 9 para Botafogo-RJ (visitante)
+
+5. Veja a predição!
+
+
+📚 DOCUMENTAÇÃO
+
+Quer saber mais?
+  • NOVO_PREDITOR_TIMES.txt - Descrição do novo programa
+  • GUIA_PREDITOR_TIMES.py - Guia completo (execute com python)
+  • GUIA_INTERPRETACAO.md - Como entender os resultados
+  • README.md - Documentação geral
+
+
+🎊 RESUMO DOS PROGRAMAS DISPONÍVEIS
+
+┌────────────────────────────────────────────────────────────────┐
+│ ✅ preditor_futebol.py       (Script principal)               │
+│ ✅ predicao_futebol.ipynb    (Notebook Jupyter)               │
+│ ✅ inicio_rapido.py          (Menu interativo)                │
+│ ✅ exemplos_avancados.py     (6 exemplos completos)           │
+│ ✅ teste_rapido.py           (Validação do sistema)           │
+│ ✅ demonstracao_predicoes.py (5 clássicos do futebol)         │
+│ ✅ 🆕 preditor_por_time.py   (NOVO - Escolha os times!)      │
+└────────────────────────────────────────────────────────────────┘
+
+
+🚀 COMEÇAR AGORA!
+
+A maneira mais fácil de começar:
+
+   $ python preditor_por_time.py
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Bem-vindo ao novo Preditor Interativo de Futebol! 🏆
+
+Escolha seus times favoritos e veja as predições!
+
+Boa sorte! ⚽
+
+═══════════════════════════════════════════════════════════════════════════════
