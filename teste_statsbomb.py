@@ -37,13 +37,22 @@ def teste_rapido():
         else:
             print("\n⚠️  Dados de Brasil não encontrados (dados são principalmente europeus)")
         
-        # 2. Carregar exemplo de partidas (LaLiga)
+        # 2. Carregar exemplo de partidas (Serie A Brasil)
         print("\n" + "-" * 60)
-        print("[2] Carregando exemplo: LaLiga 2020/21...")
+        print("[2] Carregando exemplo: Serie A Brasil (2015/2016)...")
         
+        # Serie A (Brasil) tem competition_id=12
         match_url = "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/12/1.json"
         match_response = requests.get(match_url, timeout=10)
-        partidas = match_response.json()
+        
+        try:
+            partidas = match_response.json()
+        except json.JSONDecodeError:
+            # Tenta outra competição
+            print("  Tentando LaLiga...")
+            match_url = "https://raw.githubusercontent.com/statsbomb/open-data/master/data/matches/4/44.json"
+            match_response = requests.get(match_url, timeout=10)
+            partidas = match_response.json()
         
         df_partidas = pd.DataFrame(partidas)
         print(f"✓ {len(df_partidas)} partidas carregadas")
