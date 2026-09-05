@@ -1,0 +1,11 @@
+RESUMO DE PREDICOES - 380 PARTIDAS
+================================================================================
+
+Total de predicoes: 380
+Confianca media: 45.1%
+Gols mandante media: 1.86
+Gols visitante media: 1.00
+
+Distribuicao de Resultados:
+resultado
+Mandante    380
