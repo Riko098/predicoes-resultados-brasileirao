@@ -1,26 +1,31 @@
 """
-Solução Alternativa: Clonar repositório StatsBomb para uso local
-Mais confiável que acessar via HTTP
+Solucao Alternativa: Clonar repositorio StatsBomb para uso local
+Mais confiavel que acessar via HTTP
 """
 
 import subprocess
 import json
 import pandas as pd
 from pathlib import Path
+import sys
+import os
+
+# Configurar encoding UTF-8
+os.environ['PYTHONIOENCODING'] = 'utf-8'
 
 def clonar_statsbomb():
-    """Clona repositório do StatsBomb localmente"""
+    """Clona repositorio do StatsBomb localmente"""
     print("=" * 60)
-    print("CLONANDO REPOSITÓRIO STATSBOMB")
+    print("CLONANDO REPOSITORIO STATSBOMB")
     print("=" * 60)
     
     repo_path = Path("statsbomb_data")
     
     if repo_path.exists():
-        print(f"✓ Repositório já existe em: {repo_path}")
+        print(f"[OK] Repositorio ja existe em: {repo_path}")
         return repo_path
     
-    print("\nClonando estatsbomb/open-data...")
+    print("\nClonando statsbomb/open-data...")
     print("(Isso pode levar alguns minutos)\n")
     
     try:
@@ -30,17 +35,17 @@ def clonar_statsbomb():
             str(repo_path)
         ], check=True, capture_output=False)
         
-        print("\n✓ Clone concluído!")
+        print("\n[OK] Clone concluido!")
         return repo_path
         
     except subprocess.CalledProcessError as e:
-        print(f"✗ Erro ao clonar: {e}")
+        print(f"[ERRO] Ao clonar: {e}")
         return None
 
 def explorar_competicoes(repo_path):
-    """Explora competições disponíveis"""
+    """Explora competicoes disponiveis"""
     print("\n" + "=" * 60)
-    print("COMPETIÇÕES DISPONÍVEIS")
+    print("COMPETICOES DISPONIVEIS")
     print("=" * 60)
     
     comp_file = repo_path / "data" / "competitions.json"
@@ -50,26 +55,26 @@ def explorar_competicoes(repo_path):
     
     df = pd.DataFrame(competicoes)
     
-    print(f"\n✓ {len(df)} competições encontradas\n")
+    print(f"\n[OK] {len(df)} competicoes encontradas\n")
     
     # Mostrar competições do Brasil
     brasil = df[df['competition_name'].str.contains('Serie|Brazil|Brasileir', case=False, na=False)]
     
     if len(brasil) > 0:
-        print("🇧🇷 BRASIL:")
+        print("[BRASIL - SERIE A]:")
         print("-" * 60)
         for _, row in brasil.iterrows():
             print(f"ID: {row['competition_id']:4d} | {row['competition_name']:25s} | {row['season_name']}")
     
     # Mostrar outras competições disponíveis
-    print("\n📊 OUTRAS COMPETIÇÕES:")
+    print("\n[OUTRAS COMPETICOES]:")
     print("-" * 60)
     outros = df[~df['competition_name'].str.contains('Serie|Brazil|Brasileir', case=False, na=False)]
     
     for _, row in outros.head(15).iterrows():
         print(f"ID: {row['competition_id']:4d} | {row['competition_name']:25s} | {row['season_name']}")
     
-    print(f"\n... e mais {len(outros) - 15} competições")
+    print(f"\n... e mais {len(outros) - 15} competicoes")
     
     return df
 
@@ -82,28 +87,48 @@ def explorar_partidas(repo_path, competition_id, season_id):
     match_file = repo_path / "data" / "matches" / str(competition_id) / f"{season_id}.json"
     
     if not match_file.exists():
-        print(f"✗ Arquivo não encontrado: {match_file}")
+        print(f"[ERRO] Arquivo nao encontrado: {match_file}")
         return None
     
-    with open(match_file, 'r', encoding='utf-8') as f:
-        partidas = json.load(f)
-    
-    df = pd.DataFrame(partidas)
-    print(f"\n✓ {len(df)} partidas encontradas\n")
-    
-    # Mostrar primeiras
-    for idx, row in df.head(5).iterrows():
-        home = row['home_team']['name']
-        away = row['away_team']['name']
-        score_home = row['home_score']
-        score_away = row['away_score']
-        status = row['status']
+    try:
+        with open(match_file, 'r', encoding='utf-8') as f:
+            partidas = json.load(f)
         
-        print(f"{home:20s} {score_home:2} x {score_away:<2} {away:20s} [{status}]")
-    
-    print(f"\n... e mais {len(df) - 5} partidas")
-    
-    return df
+        df = pd.DataFrame(partidas)
+        print(f"\n[OK] {len(df)} partidas encontradas\n")
+        
+        # Mostrar primeiras - com tratamento robusto
+        for idx, row in df.head(5).iterrows():
+            try:
+                # Tenta acessar o nome do time
+                if isinstance(row.get('home_team'), dict):
+                    home = row['home_team'].get('name', 'Unknown')
+                else:
+                    home = str(row.get('home_team', 'Unknown'))
+                    
+                if isinstance(row.get('away_team'), dict):
+                    away = row['away_team'].get('name', 'Unknown')
+                else:
+                    away = str(row.get('away_team', 'Unknown'))
+                
+                score_home = row.get('home_score', '-')
+                score_away = row.get('away_score', '-')
+                status = row.get('status', 'unknown')
+                
+                print(f"{home:20s} {score_home:2} x {score_away:<2} {away:20s} [{status}]")
+            except Exception as e:
+                print(f"  Erro ao processar linha: {e}")
+                continue
+        
+        if len(df) > 5:
+            print(f"\n... e mais {len(df) - 5} partidas")
+        
+        return df
+        
+    except Exception as e:
+        print(f"[ERRO] Ao carregar partidas: {e}")
+        print(f"   Arquivo: {match_file}")
+        return None
 
 def explorar_eventos(repo_path, match_id):
     """Explora eventos de uma partida"""
@@ -114,32 +139,44 @@ def explorar_eventos(repo_path, match_id):
     event_file = repo_path / "data" / "events" / f"{match_id}.json"
     
     if not event_file.exists():
-        print(f"✗ Arquivo não encontrado: {event_file}")
+        print(f"[ERRO] Arquivo nao encontrado: {event_file}")
         return None
     
-    with open(event_file, 'r', encoding='utf-8') as f:
-        eventos = json.load(f)
-    
-    print(f"\n✓ {len(eventos)} eventos encontrados\n")
-    
-    # Contar tipos de eventos
-    tipos = {}
-    for e in eventos:
-        tipo = e['type']['name']
-        tipos[tipo] = tipos.get(tipo, 0) + 1
-    
-    print("Tipos de eventos (Top 15):")
-    print("-" * 40)
-    for tipo, count in sorted(tipos.items(), key=lambda x: x[1], reverse=True)[:15]:
-        barra = "█" * (count // 10)
-        print(f"{tipo:20s}: {count:4d} {barra}")
-    
-    return eventos
+    try:
+        with open(event_file, 'r', encoding='utf-8') as f:
+            eventos = json.load(f)
+        
+        print(f"\n[OK] {len(eventos)} eventos encontrados\n")
+        
+        # Contar tipos de eventos com tratamento robusto
+        tipos = {}
+        for e in eventos:
+            try:
+                tipo = e.get('type', {})
+                if isinstance(tipo, dict):
+                    tipo_nome = tipo.get('name', 'Unknown')
+                else:
+                    tipo_nome = str(tipo)
+                tipos[tipo_nome] = tipos.get(tipo_nome, 0) + 1
+            except:
+                tipos['Unknown'] = tipos.get('Unknown', 0) + 1
+        
+        print("Tipos de eventos (Top 15):")
+        print("-" * 40)
+        for tipo, count in sorted(tipos.items(), key=lambda x: x[1], reverse=True)[:15]:
+            barra = "#" * (count // 10)
+            print(f"{tipo:20s}: {count:4d} {barra}")
+        
+        return eventos
+        
+    except Exception as e:
+        print(f"[ERRO] Ao carregar eventos: {e}")
+        return None
 
 def main():
     print("\n")
     
-    # 1. Clonar repositório
+    # 1. Clonar repositório (se ainda não existe)
     repo_path = clonar_statsbomb()
     if not repo_path:
         return
@@ -158,23 +195,30 @@ def main():
         
         # 4. Se houver partidas, explorar eventos
         if partidas is not None and len(partidas) > 0:
-            match_id = partidas.iloc[0]['match_id']
-            eventos = explorar_eventos(repo_path, match_id)
+            # Procurar primeira partida completa com eventos
+            for idx, row in partidas.iterrows():
+                match_id = row.get('match_id')
+                if match_id:
+                    event_file = repo_path / "data" / "events" / f"{match_id}.json"
+                    if event_file.exists():
+                        eventos = explorar_eventos(repo_path, match_id)
+                        break
     else:
-        print("\n⚠️  Brasil não encontrado. Explorando outra competição...")
-        comp_id = competicoes.iloc[5]['competition_id']
-        season_id = competicoes.iloc[5]['season_id']
-        
-        partidas = explorar_partidas(repo_path, comp_id, season_id)
+        print("\n[AVISO] Brasil nao encontrado. Explorando outra competicao...")
+        if len(competicoes) > 5:
+            comp_id = competicoes.iloc[5]['competition_id']
+            season_id = competicoes.iloc[5]['season_id']
+            
+            partidas = explorar_partidas(repo_path, comp_id, season_id)
     
     print("\n" + "=" * 60)
-    print("✓ EXPLORAÇÃO CONCLUÍDA!")
+    print("[OK] EXPLORACAO CONCLUIDA!")
     print("=" * 60)
     print(f"\nDados salvos em: {repo_path}")
-    print("\nPróximos passos:")
-    print("1. Explore integracao_statsbomb.py para usar os dados")
+    print("\nProximos passos:")
+    print("1. Explore integracao/integracao_statsbomb.py para usar os dados")
     print("2. Crie features engineering com os dados locais")
-    print("3. Integre com seu modelo de predição")
+    print("3. Integre com seu modelo de predicao")
 
 if __name__ == "__main__":
     main()
